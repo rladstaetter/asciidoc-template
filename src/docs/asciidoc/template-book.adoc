@@ -1,0 +1,13 @@
+= Asciidoc book template
+Author <author@some.mail.com>
+v1.0, {docdate}
+:homepage: http://example.com
+:example-caption!:
+ifndef::imagesdir[:imagesdir: images]
+ifndef::lecturedir[:lecturedir: {docdir}]
+
+== A headline
+=== Another headline
+
+Check out Asciidoc syntax here: http://asciidoctor.org/docs/asciidoc-syntax-quick-reference/
+

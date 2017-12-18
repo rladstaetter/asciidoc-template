@@ -1,0 +1,31 @@
+= Asciidoc book template
+Author <author@some.mail.com>
+v1.0, {docdate}
+:homepage: http://example.com
+:example-caption!:
+ifndef::imagesdir[:imagesdir: images]
+ifndef::lecturedir[:lecturedir: {docdir}]
+
+== A slide
+
+=== a sublside
+
+* some
+* enumerated
+* bullet
+* points
+
+
+=== a sublside with steps
+
+[%step]
+* some
+* enumerated
+* bullet
+* points
+
+=== More
+
+* Checkout http://asciidoctor.org/docs/asciidoctor-revealjs/
+
+=== End
