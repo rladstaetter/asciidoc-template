@@ -27,9 +27,15 @@
         <asciidoctor-revealjs.version>1.0.4</asciidoctor-revealjs.version>
         <project.slides.directory>${project.build.directory}/generated-slides</project.slides.directory>
 
+        <!-- for epub generation -->
+        <asciidoctorj.epub.version>1.5.0-alpha.7</asciidoctorj.epub.version>
+
+        <!-- for mobi generation, set this variable in your settings.xml -->
+        <path.to.kindlegen>${kindlegen.binary}</path.to.kindlegen>
     </properties>
 
     <build>
+        <defaultGoal>generate-resources</defaultGoal>
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -91,6 +97,11 @@
                             <artifactId>asciidoctorj</artifactId>
                             <version>${asciidoctorj.version}</version>
                         </dependency>
+                        <dependency>
+                            <groupId>org.asciidoctor</groupId>
+                            <artifactId>asciidoctorj-epub3</artifactId>
+                            <version>${asciidoctorj.epub.version}</version>
+                        </dependency>
                     </dependencies>
                     <configuration>
                         <sourceDirectory>src/docs/asciidoc</sourceDirectory>
@@ -151,6 +162,40 @@
                                 <revealjs_transition>linear</revealjs_transition>
                                 <project-version>${project.version}</project-version>
                             </attributes>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>generate-epub</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                        <configuration>
+                            <backend>epub3</backend>
+                            <sourceHighlighter>coderay</sourceHighlighter>
+                            <sourceDocumentName>template-mobi.adoc</sourceDocumentName>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.6.0</version>
+                <executions>
+                    <!-- alternative way to generate a mobi file with kindlegen -->
+                    <execution>
+                        <id>generate-mobi-file</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <workingDirectory>${project.build.directory}/generated-docs/</workingDirectory>
+                            <executable>${path.to.kindlegen}</executable>
+                            <arguments>
+                                <argument>template-mobi.epub</argument>
+                            </arguments>
                         </configuration>
                     </execution>
                 </executions>
