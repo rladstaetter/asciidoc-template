@@ -20,12 +20,15 @@
         <asciidoctor.maven.plugin.version>1.5.5</asciidoctor.maven.plugin.version>
         <asciidoctorj.pdf.version>1.5.0-alpha.16</asciidoctorj.pdf.version>
         <asciidoctorj.version>1.5.6</asciidoctorj.version>
-        <jruby.version>1.7.26</jruby.version>
+        <jruby.version>9.1.15.0</jruby.version>
 
         <!-- for slides -->
         <revealjs.version>3.5.0</revealjs.version>
         <asciidoctor-revealjs.version>1.0.4</asciidoctor-revealjs.version>
         <project.slides.directory>${project.build.directory}/generated-slides</project.slides.directory>
+
+        <!-- pdf generation -->
+        <asciidoctorj.pdf.version>1.5.0-alpha.16</asciidoctorj.pdf.version>
 
         <!-- for epub generation -->
         <asciidoctorj.epub.version>1.5.0-alpha.7</asciidoctorj.epub.version>
@@ -124,7 +127,7 @@
                 <executions>
                     <execution>
                         <id>generate-book</id>
-                        <phase>process-resources</phase>
+                        <phase>generate-resources</phase>
                         <goals>
                             <goal>process-asciidoc</goal>
                         </goals>
@@ -143,7 +146,7 @@
                     </execution>
                     <execution>
                         <id>generate-presentation</id>
-                        <phase>process-resources</phase>
+                        <phase>generate-resources</phase>
                         <goals>
                             <goal>process-asciidoc</goal>
                         </goals>
@@ -176,14 +179,31 @@
                             <sourceDocumentName>template-mobi.adoc</sourceDocumentName>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>generate-mobi</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                        <configuration>
+                            <backend>epub3</backend>
+                            <sourceHighlighter>coderay</sourceHighlighter>
+                            <sourceDocumentName>template-mobi.adoc</sourceDocumentName>
+                            <attributes>
+                                <ebook-format>kf8</ebook-format>
+                            </attributes>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
+
+            <!--Use this workaround if you have problems creating mobi files with asciiddoc-epub3 -->
+            <!--
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.6.0</version>
                 <executions>
-                    <!-- alternative way to generate a mobi file with kindlegen -->
                     <execution>
                         <id>generate-mobi-file</id>
                         <phase>generate-resources</phase>
@@ -200,6 +220,7 @@
                     </execution>
                 </executions>
             </plugin>
+            -->
         </plugins>
     </build>
 
