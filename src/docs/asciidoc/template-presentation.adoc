@@ -15,7 +15,6 @@ ifndef::lecturedir[:lecturedir: {docdir}]
 * bullet
 * points
 
-
 === a sublside with steps
 
 [%step]
@@ -24,8 +23,10 @@ ifndef::lecturedir[:lecturedir: {docdir}]
 * bullet
 * points
 
-=== More
+=== Made possible by
 
-* Checkout http://asciidoctor.org/docs/asciidoctor-revealjs/
+* http://www.revealjs.com
+* https://github.com/hakimel/reveal.js
+* http://asciidoctor.org/docs/asciidoctor-revealjs/
 
-=== End
+=== Thank you
