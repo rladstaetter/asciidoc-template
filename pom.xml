@@ -222,7 +222,7 @@
                 </executions>
             </plugin>
 
-            <!--Use this workaround if you have problems creating mobi files with asciiddoc-epub3 -->
+            <!--Use this workaround if you have problems creating mobi files with asciidoc-epub3 -->
             <!--
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
